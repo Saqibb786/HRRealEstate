@@ -5,6 +5,8 @@ import ImageGallery from "@/components/ui/ImageGallery";
 import ShareProperty from "@/components/ui/ShareProperty";
 import type { Metadata } from "next";
 
+export const revalidate = 60;
+
 export async function generateMetadata({
   params,
 }: {
