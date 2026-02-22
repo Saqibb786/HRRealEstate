@@ -1,21 +1,17 @@
 import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 
 export async function PUT(request: Request) {
-  const session = await getServerSession();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  // Auth is already validated by middleware for /api/admin/* routes
 
   try {
     const { currentUsername, currentPassword, newUsername, newPassword } =
       await request.json();
 
-    if (!currentUsername || !currentPassword || !newUsername || !newPassword) {
+    if (!currentUsername || !currentPassword || !newPassword) {
       return NextResponse.json(
-        { error: "All fields are required" },
+        { error: "Current credentials and new password are required" },
         { status: 400 },
       );
     }
@@ -61,16 +57,19 @@ export async function PUT(request: Request) {
     // Hash new password
     const hashedPassword = await bcrypt.hash(newPassword, 12);
 
+    // Build update/create data — only change username if provided
+    const usernameToSet = newUsername?.trim() || (existingAdmin?.username ?? envUsername);
+
     // Upsert admin user in database with username
     await prisma.user.upsert({
       where: { email: "admin@hr-realestate.com" },
       update: {
-        username: newUsername,
+        username: usernameToSet,
         password: hashedPassword,
       },
       create: {
         email: "admin@hr-realestate.com",
-        username: newUsername,
+        username: usernameToSet,
         password: hashedPassword,
       },
     });

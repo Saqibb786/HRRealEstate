@@ -151,7 +151,7 @@ export default function AdminLayout({
 
         <div className="p-4 border-t border-indigo-900">
           <button
-            onClick={() => signOut({ callbackUrl: "/admin" })}
+            onClick={() => signOut({ callbackUrl: "/admin/login" })}
             className="flex items-center gap-3 px-4 py-3 w-full rounded-lg text-gray-300 hover:bg-red-900/50 hover:text-red-400 transition-colors"
           >
             <svg
@@ -179,7 +179,7 @@ export default function AdminLayout({
         <header className="md:hidden bg-primary text-white p-4 flex justify-between items-center">
           <h2 className="text-lg font-bold text-accent">Admin Panel</h2>
           <button
-            onClick={() => signOut({ callbackUrl: "/admin" })}
+            onClick={() => signOut({ callbackUrl: "/admin/login" })}
             className="text-xs bg-red-900/40 px-3 py-1.5 rounded-lg font-medium hover:bg-red-900/60 transition-colors"
           >
             Sign Out
