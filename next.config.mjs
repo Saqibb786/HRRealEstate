@@ -45,6 +45,10 @@ const nextConfig = {
   },
   // Disable x-powered-by header
   poweredByHeader: false,
+  // Ignore ESLint during builds (lint separately in dev)
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;
