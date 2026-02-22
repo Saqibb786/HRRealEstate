@@ -40,13 +40,11 @@ export async function PUT(request: Request) {
 
     if (existingAdmin) {
       // Validate against database credentials
-      const usernameMatch = existingAdmin.email === "admin@hr-realestate.com";
-      const storedUsername = (existingAdmin as any).username || envUsername;
       const passwordMatch = await bcrypt.compare(
         currentPassword,
         existingAdmin.password,
       );
-      isValid = currentUsername === storedUsername && passwordMatch;
+      isValid = currentUsername === existingAdmin.username && passwordMatch;
     } else {
       // Validate against env vars (first time)
       isValid =
@@ -63,26 +61,19 @@ export async function PUT(request: Request) {
     // Hash new password
     const hashedPassword = await bcrypt.hash(newPassword, 12);
 
-    // Upsert admin user in database
+    // Upsert admin user in database with username
     await prisma.user.upsert({
       where: { email: "admin@hr-realestate.com" },
       update: {
+        username: newUsername,
         password: hashedPassword,
       },
       create: {
         email: "admin@hr-realestate.com",
+        username: newUsername,
         password: hashedPassword,
       },
     });
-
-    // Store new username in a simple way - we'll use a separate config
-    // Since the User model doesn't have a username field, we store it alongside
-    // We'll write it to a config that the auth handler reads
-    const fs = await import("fs");
-    const path = await import("path");
-    const configPath = path.join(process.cwd(), "admin-config.json");
-    const config = { username: newUsername };
-    fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
 
     return NextResponse.json({ success: true });
   } catch (error) {

@@ -24,7 +24,7 @@ export async function generateMetadata({
       }
       return {
         title: property.title,
-        description: `${property.propertyType} in ${property.phase} — ${property.size}. ${property.showPricePublicly ? `PKR ${(property.price / 10000000).toFixed(2)} Crore.` : "Call for price."} HR Real Estate.`,
+        description: `${property.propertyType} in ${property.phase} — ${property.size}. ${property.showPricePublicly && property.price ? `PKR ${(property.price / 10000000).toFixed(2)} Crore.` : "Call for price."} HR Real Estate.`,
         openGraph: {
           title: property.title,
           description: `${property.propertyType} in ${property.phase} — ${property.size}`,

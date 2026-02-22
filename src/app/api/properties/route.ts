@@ -12,10 +12,10 @@ export async function GET(request: Request) {
     const where: any = {};
     if (featured) where.featured = featured === "true";
     if (propertyType)
-      where.propertyType = { equals: propertyType, set: "insensitive" };
+      where.propertyType = { equals: propertyType, mode: "insensitive" };
     if (listingType)
-      where.listingType = { equals: listingType, set: "insensitive" };
-    if (phase) where.phase = { equals: phase, set: "insensitive" };
+      where.listingType = { equals: listingType, mode: "insensitive" };
+    if (phase) where.phase = { equals: phase, mode: "insensitive" };
 
     const properties = await prisma.property.findMany({
       where,

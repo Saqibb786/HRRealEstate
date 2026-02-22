@@ -30,12 +30,16 @@ const nextConfig = {
       },
     ];
   },
-  // Allow external images (Unsplash + uploaded)
+  // Allow external images (Unsplash + Cloudinary)
   images: {
     remotePatterns: [
       {
         protocol: "https",
         hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
       },
     ],
   },

@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
-import { existsSync } from "fs";
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export async function POST(request: Request) {
   try {
@@ -12,17 +16,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "No files uploaded" }, { status: 400 });
     }
 
-    // Ensure upload directory exists
-    const uploadDir = path.join(
-      process.cwd(),
-      "public",
-      "uploads",
-      "properties",
-    );
-    if (!existsSync(uploadDir)) {
-      await mkdir(uploadDir, { recursive: true });
-    }
-
     const uploadedPaths: string[] = [];
 
     for (const file of files) {
@@ -31,19 +24,26 @@ export async function POST(request: Request) {
         continue;
       }
 
-      // Generate unique filename
-      const timestamp = Date.now();
-      const randomSuffix = Math.random().toString(36).substring(2, 8);
-      const ext = file.name.split(".").pop() || "jpg";
-      const filename = `${timestamp}-${randomSuffix}.${ext}`;
+      // Validate file size (max 10MB)
+      if (file.size > 10 * 1024 * 1024) {
+        continue;
+      }
 
-      // Read file buffer and write to disk
+      // Convert to base64 for Cloudinary upload
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
-      const filePath = path.join(uploadDir, filename);
-      await writeFile(filePath, buffer);
+      const base64 = `data:${file.type};base64,${buffer.toString("base64")}`;
 
-      uploadedPaths.push(`/uploads/properties/${filename}`);
+      // Upload to Cloudinary
+      const result = await cloudinary.uploader.upload(base64, {
+        folder: "hr-real-estate/properties",
+        resource_type: "image",
+        transformation: [
+          { width: 1200, height: 800, crop: "limit", quality: "auto" },
+        ],
+      });
+
+      uploadedPaths.push(result.secure_url);
     }
 
     if (uploadedPaths.length === 0) {

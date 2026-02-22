@@ -2,8 +2,6 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
-import fs from "fs";
-import path from "path";
 
 const handler = NextAuth({
   providers: [
@@ -23,20 +21,12 @@ const handler = NextAuth({
           });
 
           if (adminUser) {
-            // Read stored username from config
-            let storedUsername = process.env.ADMIN_USERNAME || "admin";
-            const configPath = path.join(process.cwd(), "admin-config.json");
-            if (fs.existsSync(configPath)) {
-              const config = JSON.parse(fs.readFileSync(configPath, "utf-8"));
-              storedUsername = config.username || storedUsername;
-            }
-
             const passwordMatch = await bcrypt.compare(
               credentials.password,
               adminUser.password,
             );
 
-            if (credentials.username === storedUsername && passwordMatch) {
+            if (credentials.username === adminUser.username && passwordMatch) {
               return {
                 id: "1",
                 name: "Admin User",
