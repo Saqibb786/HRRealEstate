@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Property {
+  id                String   @id @default(cuid())
+  title             String
+  description       String
+  phase             String
+  propertyType      String   // House, Plot, Commercial
+  listingType       String   // Buy, Rent
+  size              String
+  bedrooms          Int?
+  bathrooms         Int?
+  status            String   @default("Available") // Available, Sold, Rented
+  featured          Boolean  @default(false)
+  showPricePublicly Boolean  @default(false)
+  price             Float?
+  images            String   // Stored as JSON string representation of array
+  amenities         String?  // Stored as JSON string array, e.g. ["Swimming Pool","Garden"]
+  createdAt         DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  message   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Inquiry {
+  id                String   @id @default(cuid())
+  name              String
+  phone             String
+  message           String
+  propertyReference String?
+  status            String   @default("New") // New, Contacted
+  createdAt         DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
