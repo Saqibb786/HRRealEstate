@@ -197,10 +197,10 @@ export default function ContactPage() {
               </p>
             </div>
 
-            <div className="flex gap-3 relative z-10 flex-shrink-0">
+            <div className="flex flex-col sm:flex-row gap-3 relative z-10 flex-shrink-0 w-full sm:w-auto">
               <a
                 href="tel:03004237276"
-                className="flex items-center gap-2 bg-accent text-primary px-6 py-3 rounded-xl font-bold text-sm hover:bg-accent/90 shadow-lg shadow-accent/20 transition-all duration-200"
+                className="flex items-center justify-center gap-2 bg-accent text-primary px-6 py-3 rounded-xl font-bold text-sm hover:bg-accent/90 shadow-lg shadow-accent/20 transition-all duration-200 w-full sm:w-auto"
               >
                 <svg
                   width="16"
@@ -220,7 +220,7 @@ export default function ContactPage() {
                 href="https://wa.me/923004237276"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-[#1da851] shadow-lg shadow-[#25D366]/20 transition-all duration-200"
+                className="flex items-center justify-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-[#1da851] shadow-lg shadow-[#25D366]/20 transition-all duration-200 w-full sm:w-auto"
               >
                 <svg
                   width="16"

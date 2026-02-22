@@ -23,7 +23,7 @@ export default function ImageGallery({ images, title }: ImageGalleryProps) {
     <>
       {/* Main Image */}
       <div
-        className="w-full h-[400px] md:h-[500px] lg:h-[550px] bg-gray-100 rounded-2xl overflow-hidden relative group cursor-pointer shadow-lg"
+        className="w-full h-[280px] sm:h-[400px] md:h-[500px] lg:h-[550px] bg-gray-100 rounded-2xl overflow-hidden relative group cursor-pointer shadow-lg"
         onClick={() => setIsLightboxOpen(true)}
       >
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 z-10" />
@@ -42,7 +42,7 @@ export default function ImageGallery({ images, title }: ImageGalleryProps) {
                 e.stopPropagation();
                 goToPrev();
               }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/90 backdrop-blur-sm shadow-lg flex items-center justify-center text-gray-800 hover:bg-white transition-colors duration-200 opacity-0 group-hover:opacity-100"
+              className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/90 backdrop-blur-sm shadow-lg flex items-center justify-center text-gray-800 hover:bg-white transition-colors duration-200 md:opacity-0 md:group-hover:opacity-100"
             >
               <svg
                 width="20"
@@ -62,7 +62,7 @@ export default function ImageGallery({ images, title }: ImageGalleryProps) {
                 e.stopPropagation();
                 goToNext();
               }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/90 backdrop-blur-sm shadow-lg flex items-center justify-center text-gray-800 hover:bg-white transition-colors duration-200 opacity-0 group-hover:opacity-100"
+              className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/90 backdrop-blur-sm shadow-lg flex items-center justify-center text-gray-800 hover:bg-white transition-colors duration-200 md:opacity-0 md:group-hover:opacity-100"
             >
               <svg
                 width="20"
@@ -172,7 +172,7 @@ export default function ImageGallery({ images, title }: ImageGalleryProps) {
 
           {/* Main Lightbox Image */}
           <div
-            className="relative w-full h-full flex items-center justify-center px-16"
+            className="relative w-full h-full flex items-center justify-center px-4 sm:px-10 md:px-16"
             onClick={(e) => e.stopPropagation()}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
