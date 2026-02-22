@@ -1,4 +1,16 @@
 import React from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description:
+    "Get in touch with HR Real Estate. Call 0300-4237276 for expert DHA property guidance. Visit us at DHA Phase 1, Lahore.",
+  openGraph: {
+    title: "Contact HR Real Estate",
+    description:
+      "Call 0300-4237276 for expert DHA property guidance. Visit us at DHA Phase 1, Lahore.",
+  },
+};
 
 export default function ContactPage() {
   return (

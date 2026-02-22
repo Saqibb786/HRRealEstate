@@ -4,6 +4,18 @@ import { Button } from "@/components/ui/Button";
 import { Select } from "@/components/ui/Select";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Properties",
+  description:
+    "Browse premium DHA Lahore properties for sale, purchase, and rent. Houses, plots, and commercial properties across all DHA phases.",
+  openGraph: {
+    title: "DHA Properties | HR Real Estate",
+    description:
+      "Browse premium DHA Lahore properties — houses, plots, and commercial listings across all phases.",
+  },
+};
 
 export default async function PropertiesPage({
   searchParams,

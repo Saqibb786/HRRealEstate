@@ -1,5 +1,17 @@
 import React from "react";
 import { Card } from "@/components/ui/Card";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description:
+    "Learn about HR Real Estate — 20+ years of excellence in DHA Lahore real estate. Trusted by thousands of families and investors.",
+  openGraph: {
+    title: "About HR Real Estate",
+    description:
+      "20+ years of excellence in DHA Lahore real estate. Trusted by thousands of families and investors.",
+  },
+};
 
 export default function AboutPage() {
   return (
@@ -20,7 +32,7 @@ export default function AboutPage() {
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center mb-16 bg-white p-6 md:p-10 rounded-2xl shadow-sm border border-gray-100">
           <div className="rounded-xl overflow-hidden h-[350px] md:h-[420px] relative shadow-lg group">
             <div
-              className="absolute inset-0 bg-cover bg-center"
+              className="absolute inset-0 bg-cover bg-center transform group-hover:scale-105 transition-transform duration-700"
               style={{
                 backgroundImage:
                   "url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1973&q=80')",

@@ -31,7 +31,7 @@ export default function ImageGallery({ images, title }: ImageGalleryProps) {
         <img
           src={images[activeIndex]}
           alt={`${title} - Image ${activeIndex + 1}`}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
         />
 
         {/* Navigation Arrows */}

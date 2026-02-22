@@ -3,6 +3,38 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import ImageGallery from "@/components/ui/ImageGallery";
 import ShareProperty from "@/components/ui/ShareProperty";
+import type { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  try {
+    const property = await prisma.property.findUnique({
+      where: { id: params.id },
+    });
+    if (property) {
+      let ogImage = "/icon.svg";
+      if (property.images) {
+        try {
+          const arr = JSON.parse(property.images);
+          if (Array.isArray(arr) && arr.length > 0) ogImage = arr[0];
+        } catch {}
+      }
+      return {
+        title: property.title,
+        description: `${property.propertyType} in ${property.phase} — ${property.size}. ${property.showPricePublicly ? `PKR ${(property.price / 10000000).toFixed(2)} Crore.` : "Call for price."} HR Real Estate.`,
+        openGraph: {
+          title: property.title,
+          description: `${property.propertyType} in ${property.phase} — ${property.size}`,
+          images: [{ url: ogImage }],
+        },
+      };
+    }
+  } catch {}
+  return { title: "Property Details" };
+}
 
 export default async function PropertyDetailPage({
   params,

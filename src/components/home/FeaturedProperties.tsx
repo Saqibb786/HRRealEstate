@@ -74,7 +74,7 @@ export const FeaturedProperties = async () => {
                     <img
                       src={imgSrc}
                       alt={property.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute top-3 left-3 z-20 flex flex-col gap-2">
                       <span className="bg-primary/90 backdrop-blur-sm text-white px-3 py-1 text-[11px] font-bold rounded-md shadow uppercase tracking-wide">

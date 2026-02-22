@@ -56,10 +56,10 @@ export const DhaPhases = () => {
             <Link
               key={phase.name}
               href={`/properties?phase=${encodeURIComponent(phase.name)}`}
-              className="group block h-48 md:h-72 rounded-2xl overflow-hidden relative shadow-sm hover:shadow-lg transition-all duration-300"
+              className="group block h-48 md:h-72 rounded-2xl overflow-hidden relative shadow-sm hover:shadow-lg transition-shadow duration-300"
             >
               <div
-                className="absolute inset-0 bg-cover bg-center"
+                className="absolute inset-0 bg-cover bg-center transform group-hover:scale-105 transition-transform duration-700"
                 style={{ backgroundImage: `url('${phase.image}')` }}
               ></div>
               <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/30 to-transparent"></div>
