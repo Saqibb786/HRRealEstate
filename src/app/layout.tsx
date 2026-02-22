@@ -69,14 +69,10 @@ export const metadata: Metadata = {
       "20+ years of trusted DHA real estate expertise in Lahore. Buy, sell, and rent premium properties across all DHA phases.",
   },
   icons: {
-    icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-    ],
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
     apple: "/apple-icon.svg",
   },
-  metadataBase: new URL(
-    process.env.NEXTAUTH_URL || "http://localhost:3000"
-  ),
+  metadataBase: new URL(process.env.NEXTAUTH_URL || "http://localhost:3000"),
 };
 
 export default function RootLayout({

@@ -114,7 +114,9 @@ export const WhyChooseUs = () => {
               className="p-8 group hover:border-accent/30 transition-colors"
               hoverable
             >
-              <div className="mb-6 inline-block transform group-hover:scale-110 transition-transform duration-300">{feature.icon}</div>
+              <div className="mb-6 inline-block transform group-hover:scale-110 transition-transform duration-300">
+                {feature.icon}
+              </div>
               <h3 className="text-xl font-bold text-primary mb-3">
                 {feature.title}
               </h3>
