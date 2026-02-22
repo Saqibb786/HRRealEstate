@@ -58,7 +58,8 @@ export async function PUT(request: Request) {
     const hashedPassword = await bcrypt.hash(newPassword, 12);
 
     // Build update/create data — only change username if provided
-    const usernameToSet = newUsername?.trim() || (existingAdmin?.username ?? envUsername);
+    const usernameToSet =
+      newUsername?.trim() || (existingAdmin?.username ?? envUsername);
 
     // Upsert admin user in database with username
     await prisma.user.upsert({

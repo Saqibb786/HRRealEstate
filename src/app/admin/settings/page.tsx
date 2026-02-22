@@ -162,7 +162,8 @@ export default function AdminSettingsPage() {
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                  New Username <span className="text-gray-400 font-normal">(optional)</span>
+                  New Username{" "}
+                  <span className="text-gray-400 font-normal">(optional)</span>
                 </label>
                 <input
                   type="text"
